@@ -1,6 +1,6 @@
 import sys
 
-from itertools import cycle, chain, product, repeat
+from itertools import cycle, chain, product, repeat # Para la función de combinaciones
 from functools import reduce
 from random import shuffle, choice, random
 
