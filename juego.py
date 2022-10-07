@@ -16,7 +16,7 @@ from introducir import (
 LONGITUDES_BARCOS = [2, 3, 3, 4, 4, 5]
 ORDINAL = 0x2680
 
-CASO_NO_JUGADO = chr(0x2610)
+CASO_NO_JUGADO = chr(0x2610) 
 CASO_TOCADO = chr(0x2611)
 CASO_AGUA = chr(0x2612)
 
@@ -36,28 +36,29 @@ class Conventions:
 
     @staticmethod
     def generar_num_linea(x):
-        return chr(65 + x)
+        return chr(65 + x) # esto es para que empiece en A y no en 0
+        # usamos la función chr para convertir el número en letra y sumamos 65 para que empiece en A esto es por ASCII
 
     @staticmethod
     def generar_num_columna(y):
-        return str(y)
+        return str(y) 
 
     @staticmethod
-    def generar_nombre_casilla(x, y):
+    def generar_nombre_casilla(x, y): # esto es para que nos devuelva la letra y el número de la casilla
         return Conventions.generar_num_linea(x) +\
                Conventions.generar_num_columna(y)
 
 
-class Case:
-    instances = {}
-    jugadas = set()
+class Case: 
+    instances = {} #coordenadas de las casillas
+    jugadas = set() #set es un conjunto de elementos que no se repiten y no están ordenados
 
     def __init__(self, x, y):
         # Adición de las coordenadas
         self.x = x
         self.y = y
         # Queremos poder acceder a una casilla a partir de sus coordenadas
-        Case.instances[x, y] = self
+        Case.instances[x, y] = self #el instances lo usa para poder acceder a la casilla a partir de sus coordenadas
 
         # Generación del nombre de la casilla
         self._generar_nombre()
@@ -69,7 +70,7 @@ class Case:
         self.barco = None  # No toca a un barco de momento.
 
     def _generar_nombre(self):
-        """Este método puede ser sobrecargado fácilmente"""
+        """Genera el nombre de la casilla"""
         self.nombre = Conventions.generar_nombre_casilla(self.x, self.y)
 
     def jugar(self):
@@ -88,7 +89,7 @@ class Case:
     @classmethod
     def generar_casillas(cls):
         for x, y in product(range(Conventions.tablero_num_lineas),
-                            range(Conventions.tablero_num_columnas)):
+                            range(Conventions.tablero_num_columnas)): #product es para que nos devuelva todas las combinaciones de los elementos que le pasemos
             Case(x, y)
 
     def __str__(self):
